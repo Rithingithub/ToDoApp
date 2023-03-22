@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"time"
 )
 
 type User struct {
@@ -9,6 +10,14 @@ type User struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	Todo	 []Todo
+}
+
+
+type Todo struct{
+	ID       uint   `json:"id"`
+	Title    string  `json:"title"`
+	Date     time.now() `json:"date"`
 }
 
 func (i *User) Validate() map[string]string {

@@ -7,6 +7,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/Rithingithub/ToDoApp/db"
+
 )
 
 func main() {
@@ -17,7 +19,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 
-	//db := db()
+	db := db()
 
 	r := gin.Default()
 	r.GET("/", func(ctx *gin.Context) {
@@ -31,8 +33,4 @@ func main() {
 	if err := r.Run(":" + port); err != nil {
 		log.Fatalf("failed to run server: %v", err)
 	}
-}
-
-func db() {
-	panic("unimplemented")
 }
