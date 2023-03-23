@@ -1,14 +1,15 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/Rithingithub/ToDoApp/db"
 
+	"github.com/Rithingithub/ToDoApp/db"
 )
 
 func main() {
@@ -19,7 +20,16 @@ func main() {
 
 	port := os.Getenv("PORT")
 
-	db := db()
+	client, err := db.ConnectDB()
+	if err != nil {
+		log.Fatalf("Failed to connect to MongoDB: %v", err)
+	}
+
+	defer func() {
+		if err := client.Disconnect(context.Background()); err != nil {
+			log.Fatalf("Failed to disconnect from MongoDB: %v", err)
+		}
+	}()
 
 	r := gin.Default()
 	r.GET("/", func(ctx *gin.Context) {

@@ -2,22 +2,22 @@ package models
 
 import (
 	"errors"
-	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type User struct {
-	ID       uint   `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	Todo	 []Todo
+	ID       primitive.ObjectID   `bson:"_id,omitempty" json:"id,omitempty"`
+	Username string               `bson:"username" json:"username"`
+	Email    string               `bson:"email" json:"email"`
+	Password string               `bson:"password" json:"password"`
+	Todo     []primitive.ObjectID `bson:"todo,omitempty" json:"todo,omitempty"`
 }
 
-
-type Todo struct{
-	ID       uint   `json:"id"`
-	Title    string  `json:"title"`
-	Date     time.now() `json:"date"`
+type Todo struct {
+	ID    primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
+	Title string             `bson:"title" json:"title"`
+	// Date  time.Time          `bson:"date" json:"date"`
 }
 
 func (i *User) Validate() map[string]string {
