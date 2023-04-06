@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
+	"github.com/Rithingithub/ToDoApp/controller"
 	"github.com/Rithingithub/ToDoApp/db"
 )
 
@@ -32,6 +33,8 @@ func main() {
 	}()
 
 	r := gin.Default()
+
+	// Index route
 	r.GET("/", func(ctx *gin.Context) {
 		res := map[string]interface{}{
 			"message": "Api is running",
@@ -39,6 +42,13 @@ func main() {
 		}
 		ctx.JSON(http.StatusOK, res)
 	})
+
+	// User routes
+	userRoutes := r.Group("/users")
+	{
+		userRoutes.POST("", controller.CreateUser)
+		userRoutes.GET("/:id", controller.GetUser)
+	}
 
 	if err := r.Run(":" + port); err != nil {
 		log.Fatalf("failed to run server: %v", err)
