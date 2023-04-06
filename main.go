@@ -36,7 +36,7 @@ func main() {
 	}()
 
 	r := gin.Default()
-
+	//swagger
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Index route
