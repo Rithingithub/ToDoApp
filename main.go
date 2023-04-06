@@ -6,6 +6,9 @@ import (
 	"net/http"
 	"os"
 
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
@@ -33,6 +36,8 @@ func main() {
 	}()
 
 	r := gin.Default()
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Index route
 	r.GET("/", func(ctx *gin.Context) {
