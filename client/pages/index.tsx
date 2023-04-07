@@ -12,7 +12,7 @@ import React, { useState } from "react";
 
 const Index = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [data, setData] = useState<string[]>([]);
+  const [data, setData] = useState<Array<string>>([]);
   const handleInputEvent = (e: any) => {
     setInputValue(e.target?.value);
     console.log(inputValue);
