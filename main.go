@@ -54,6 +54,12 @@ func main() {
 		userRoutes.POST("", controller.CreateUser)
 		userRoutes.GET("/:id", controller.GetUser)
 	}
+	//Todo routes
+	todoRoutes := r.Group("/todos")
+	{
+		todoRoutes.POST("", controller.CreateTodo)
+		todoRoutes.GET("/:id", controller.GetTodo)
+	}
 
 	if err := r.Run(":" + port); err != nil {
 		log.Fatalf("failed to run server: %v", err)
